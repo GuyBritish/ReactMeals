@@ -9,8 +9,14 @@ const Cart = (props) => {
 	return (
 		<div>
 			<ul className={classes["cart-items"]}> {cartItems} </ul>
-			<div></div>
-			<div></div>
+			<div className={classes.total}>
+				<span> Total Amount </span>
+				<span> $$.$$ </span>
+			</div>
+			<div className={classes.actions}>
+				<button className={classes["button-alt"]}> Close </button>
+				<button className={classes.button}> Order </button>
+			</div>
 		</div>
 	);
 };
