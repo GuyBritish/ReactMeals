@@ -34,9 +34,31 @@ const cartReducer = (state, action) => {
 			total: newTotal,
 		};
 	}
+
 	if (action.type === "RMV") {
+		const cartItemIndex = state.items.findIndex((item) => {
+			return item.id === action.item.id;
+		});
+		const cartItem = state.items[cartItemIndex];
+		const newTotal = state.amount - cartItem.price;
+		let newCart;
+		if (cartItem.amount === 1) {
+			newCart = state.items.filter((item) => {
+				return action.id !== item.id;
+			});
+		} else {
+			const newCartItem = {
+				...cartItem,
+				amount: cartItem.amount - 1,
+			};
+			newCart = [...state.items];
+			newCart[cartItemIndex] = newCartItem;
+		}
+		return {
+			items: newCart,
+			total: newTotal,
+		};
 	}
-	return cartDefaultState;
 };
 
 const CartProvider = (props) => {
