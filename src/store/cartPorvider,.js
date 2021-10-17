@@ -37,10 +37,10 @@ const cartReducer = (state, action) => {
 
 	if (action.type === "RMV") {
 		const cartItemIndex = state.items.findIndex((item) => {
-			return item.id === action.item.id;
+			return item.id === action.id;
 		});
 		const cartItem = state.items[cartItemIndex];
-		const newTotal = state.amount - cartItem.price;
+		const newTotal = state.total - cartItem.price;
 		let newCart;
 		if (cartItem.amount === 1) {
 			newCart = state.items.filter((item) => {
