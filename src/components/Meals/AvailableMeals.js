@@ -9,8 +9,11 @@ const axios = require("axios");
 
 const AvailableMeals = () => {
 	const [meals, setMeals] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+
 	useEffect(() => {
 		const fetchMeals = async () => {
+			setIsLoading(true);
 			const options = {
 				url: "https://reactmeals-5109b-default-rtdb.firebaseio.com/meals.json",
 			};
@@ -27,7 +30,17 @@ const AvailableMeals = () => {
 			setMeals(loadedMeals);
 		};
 		fetchMeals();
+		setIsLoading(false);
 	}, []);
+
+	if (isLoading) {
+		return (
+			<section className={classes.MealsLoading}>
+				<p>Loading...</p>
+			</section>
+		);
+	}
+
 	const mealList = meals.map((meal) => (
 		<MealItem
 			id={meal.id}
