@@ -19,6 +19,9 @@ const Checkout = (props) => {
 				<label for="postal">Postal Code</label>
 				<input type="text" id="postal" />
 			</div>
+			<button type="button" onClick={props.onCancel}>
+				Cancel
+			</button>
 			<button>Confirm</button>
 		</form>
 	);
