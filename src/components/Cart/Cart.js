@@ -4,6 +4,7 @@ import CartContext from "../../store/cartContext";
 
 import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout";
 
 import classes from "./Cart.module.css";
 
@@ -38,6 +39,7 @@ const Cart = (props) => {
 				<span> Total Amount </span>
 				<span> {total} </span>
 			</div>
+			<Checkout />
 			<div className={classes.actions}>
 				<button className={classes["button-alt"]} onClick={props.onClose}>
 					Close
