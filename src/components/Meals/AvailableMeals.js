@@ -10,6 +10,7 @@ const axios = require("axios");
 const AvailableMeals = () => {
 	const [meals, setMeals] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [httpError, setHttpError] = useState(null);
 
 	useEffect(() => {
 		const fetchMeals = async () => {
@@ -29,7 +30,10 @@ const AvailableMeals = () => {
 			}
 			setMeals(loadedMeals);
 		};
-		fetchMeals();
+
+		fetchMeals().catch((err) => {
+			setHttpError(err.message);
+		});
 		setIsLoading(false);
 	}, []);
 
@@ -37,6 +41,14 @@ const AvailableMeals = () => {
 		return (
 			<section className={classes.MealsLoading}>
 				<p>Loading...</p>
+			</section>
+		);
+	}
+
+	if (httpError) {
+		return (
+			<section className={classes.MealsError}>
+				<p>{httpError}</p>
 			</section>
 		);
 	}
